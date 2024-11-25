@@ -27,10 +27,7 @@ export function Dashboard() {
 	const handlePayment = async () => {
 		if (!selectedAd) return;
 
-		// Simulate payment processing
 		await new Promise((resolve) => setTimeout(resolve, 1000));
-
-		// Update ad status
 		const updatedAd = db.ads.updatePaidStatus(selectedAd.id, true);
 		if (updatedAd) {
 			setAds(db.ads.getAll());
