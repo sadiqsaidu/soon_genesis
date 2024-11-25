@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useState } from "react";
 import { BarChart3, Twitter } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -21,23 +20,9 @@ import {
 import { db, Ad } from "@/lib/test-db";
 
 export function Dashboard() {
-	const searchParams = useSearchParams();
 	const [ads, setAds] = useState<Ad[]>([]);
 	const [selectedAd, setSelectedAd] = useState<Ad | null>(null);
 	const [showPaymentModal, setShowPaymentModal] = useState(false);
-
-	useEffect(() => {
-		setAds(db.ads.getAll());
-
-		const newAdId = searchParams.get("newAd");
-		if (newAdId) {
-			const ad = db.ads.getById(newAdId);
-			if (ad) {
-				setSelectedAd(ad);
-				setShowPaymentModal(true);
-			}
-		}
-	}, [searchParams]);
 
 	const handlePayment = async () => {
 		if (!selectedAd) return;

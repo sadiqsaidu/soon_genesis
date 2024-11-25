@@ -1,5 +1,3 @@
-"use client";
-
 import { CreateAdForm } from "@/ui/cmapaign/ceate-ads-form";
 import { Dashboard } from "@/ui/cmapaign/dashboard";
 import React from "react";

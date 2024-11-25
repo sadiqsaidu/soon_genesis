@@ -11,7 +11,7 @@ function Logo() {
 				width={52}
 				height={52}
 			/>
-			<p className="text-primary font-bold text-xs -ml-1">MemeAds</p>
+			<p className="text-primary font-bold text-sm -ml-1">MemeAds</p>
 		</div>
 	);
 }
