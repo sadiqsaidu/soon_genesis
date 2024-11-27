@@ -17,8 +17,9 @@ import { cn } from "@/lib/utils";
 
 const navItems = [
 	{ label: "New tokens", href: "/" },
-	{ label: "Hunt gems", href: "/hunt-gems" },
-	{ label: "Create token", href: "/create-token" },
+	{ label: "Campaign", href: "/campaign" },
+	{ label: "Create token", href: "/token/create" },
+	{ label: "Leaderboard", href: "/leader-board" },
 ];
 
 const moreMenuItems = [

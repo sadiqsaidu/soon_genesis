@@ -14,8 +14,10 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
-import { db, CreateAdFormData, AdObjective } from "@/lib/test-db";
+import {  CreateAdFormData, AdObjective } from "@/lib/test-db";
 import { FileInput } from "@/components/ui/file-input";
+import { useAds } from "@/hooks/useAds";
+import { useRouter } from "next/navigation";
 
 const STEPS = ["Choose objective", "Create ad", "Customize delivery"] as const;
 
@@ -23,7 +25,9 @@ export function CreateAdForm() {
 	const [currentStep, setCurrentStep] = useState(0);
 	const [formData, setFormData] = useState<Partial<CreateAdFormData>>({});
 	const [mediaFiles, setMediaFiles] = useState<File[]>([]);
+	const { createAd, isCreating } = useAds();
 
+	const router = useRouter();
 	const handleFileSelect = (files: FileList | null) => {
 		if (files) {
 			setMediaFiles((prevFiles) => [...prevFiles, ...Array.from(files)]);
@@ -51,15 +55,15 @@ export function CreateAdForm() {
 		e.preventDefault();
 		if (!formData.objective || !formData.tweetText || !formData.budget) return;
 
-		const ad = await db.ads.create({
-			...(formData as CreateAdFormData),
-			budget: formData.budget,
-			targetLocation: formData.targetLocation || "Global",
-			startDate: formData.startDate || new Date().toISOString(),
-			endDate: formData.endDate || new Date().toISOString(),
-		});
+		const adFormData = new FormData();
+		adFormData.append("adData", JSON.stringify(formData));
+		mediaFiles.forEach((file) => adFormData.append("media", file));
 
-		console.log({ ad });
+		createAd(adFormData, {
+			onSuccess: (data) => {
+				router.push(`/dashboard?newAd=${data.id}`);
+			},
+		});
 	};
 
 	return (
@@ -247,8 +251,8 @@ export function CreateAdForm() {
 							</div>
 							<div className="flex justify-between mt-6">
 								<Button onClick={() => navigate("back")}>Back</Button>
-								<Button type="submit" disabled={!formData.budget}>
-									Create Ad
+								<Button type="submit" disabled={!formData.budget || isCreating}>
+									{isCreating ? "Creating..." : "Create Ad"}
 								</Button>
 							</div>
 						</form>
