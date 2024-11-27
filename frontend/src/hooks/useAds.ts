@@ -1,23 +1,23 @@
-import { useQuery, useMutation } from "@tanstack/react-query";
+import {  useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { useToast } from "./use-toast";
 
 export function useAds() {
 	const { toast } = useToast();
-	const fetchAds = async () => {
-		const { data } = await axios.get("/api/ads");
-		return data;
-	};
+	// const fetchAds = async () => {
+	// 	const { data } = await axios.get("/api/ads");
+	// 	return data;
+	// };
 
 	const createAd = async (adData: FormData) => {
 		const { data } = await axios.post("/api/ads", adData);
 		return data;
 	};
 
-	const adsQuery = useQuery({
-		queryKey: ["ads"],
-		queryFn: fetchAds,
-	});
+	// const adsQuery = useQuery({
+	// 	queryKey: ["ads"],
+	// 	queryFn: fetchAds,
+	// });
 
 	const createAdMutation = useMutation({
 		mutationFn: createAd,
@@ -30,9 +30,9 @@ export function useAds() {
 	});
 
 	return {
-		ads: adsQuery.data,
-		isLoading: adsQuery.isLoading,
-		isError: adsQuery.isError,
+		// ads: adsQuery.data,
+		// isLoading: adsQuery.isLoading,
+		// isError: adsQuery.isError,
 		createAd: createAdMutation.mutate,
 		isCreating: createAdMutation.isPending,
 	};

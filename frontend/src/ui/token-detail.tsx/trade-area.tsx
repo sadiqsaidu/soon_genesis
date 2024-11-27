@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge, ExternalLink, Pencil } from "lucide-react";
+import { Badge, Pencil } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import {
@@ -148,68 +148,38 @@ function TradeArea() {
 			<Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
 				<DialogContent>
 					<DialogHeader>
-						<DialogTitle className="text-xl font-bold0 flex items-center gap-2">
-							SOON genesis blockchain
+						<DialogTitle>
+							{/* Tweet to {mode === "buy" ? "Buy" : "Sell"} */} SOON genesis
+							blockchain{" "}
 							<Link
-								href="https://x.com/soon_svm"
-								target="_blank"
-								rel="noopener noreferrer"
-								className="text-blue-500 hover:text-blue-400">
-								@soon_svm <ExternalLink className="h-4 w-4 inline" />
-							</Link>
-						</DialogTitle>
-						<DialogDescription className="text-muted-foreground">
+								className="underline cursor-pointer ml-1"
+								href="https://x.com/soon_svm">
+								{" "}
+								@soon_svm{" "}
+							</Link>{" "}
+						</DialogTitle>{" "}
+						<DialogDescription>
+							{" "}
 							SOON is the most efficient rollup stack delivering top performance
 							to every L1, powered by Decoupled SVM.
 						</DialogDescription>
 					</DialogHeader>
-					<div className="space-y-4 py-4">
-						<div className="bg-muted rounded-lg p-4 space-y-2">
-							<h4 className="font-medium text-muted-foreground">
-								About SOON Stack
-							</h4>
-							<p className="text-sm text-muted-foreground">
-								SOON Stack is the collection of components that allows for the
-								deployment and running of an SVM Layer 2 on top of any base
-								Layer 1. Chains deployed using the SOON Stack are referred to as
-								SOON Chains.
-							</p>
-						</div>
-
-						<div className="grid grid-cols-2 gap-4">
-							<div className="rounded-lg p-4 bg-muted">
-								<div className="text-2xl font-bold text-primary">10x</div>
-								<div className="text-sm text-muted-foreground">
-									Performance Boost
-								</div>
-							</div>
-							<div className="bg-muted rounded-lg p-4">
-								<div className="text-2xl font-bold text-primary">100%</div>
-								<div className="text-sm text-muted-foreground">
-									L1 Compatibility
-								</div>
-							</div>
-						</div>
-
-						<div className="bg-gradient-to-r from-primary/10 to-background/10 rounded-lg p-3 border">
-							<div className="flex items-center justify-between text-sm">
-								<span className="text-muted-foreground">
-									Current SOON Price
-								</span>
-								<span className="text-primary font-medium">0.00001 ETH</span>
-							</div>
-						</div>
+					<div className=" p-1 bg-muted rounded-md">
+						<p>
+							SOON Stack is the collection of components that allows for the
+							deployment and running of an SVM Layer 2 on top of any base Layer
+							1. Chains deployed using the SOON Stack are referred to as SOON
+							Chains
+						</p>
+						<Link href="/campaign" className="underline">
+							View campaign
+						</Link>
 					</div>
-
-					<DialogFooter className="sm:justify-between">
-						<Button
-							variant="outline"
-							onClick={() => setIsModalOpen(false)}
-							className="text-zinc-400 hover:text-zinc-100 hover:bg-zinc-900">
+					<DialogFooter className="mt-6">
+						<Button variant="outline" onClick={() => setIsModalOpen(false)}>
 							Reject
 						</Button>
 						<Button onClick={handleTweetAndTrade}>
-							{" "}
 							Tweet and {mode === "buy" ? "Buy" : "Sell"}
 						</Button>
 					</DialogFooter>
