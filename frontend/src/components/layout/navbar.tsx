@@ -14,11 +14,11 @@ import {
 	NavigationMenuTrigger,
 } from "../ui/navigation-menu";
 import { cn } from "@/lib/utils";
+import { TokenCreatorModal } from "@/ui/create-token-modal";
 
 const navItems = [
 	{ label: "New tokens", href: "/" },
 	{ label: "Campaign", href: "/campaign" },
-	{ label: "Create token", href: "/token/create" },
 	{ label: "Leaderboard", href: "/leader-board" },
 ];
 
@@ -31,7 +31,7 @@ function Navbar() {
 	const pathname = usePathname();
 	return (
 		<div className="h-[72px] flex border-b px-2  lg:px-5 justify-between items-center py-2 fixed bg-background top-0 inset-x-0 w-full">
-			<div className="flex gap-4 items-center">
+			<div className="flex gap-2 items-center">
 				<Logo />
 				{navItems.map((item) => (
 					<Link
@@ -44,6 +44,12 @@ function Navbar() {
 						{item.label}
 					</Link>
 				))}
+
+				<TokenCreatorModal>
+					<p className="cursor-pointer text-muted-foreground text-sm">
+						Create Token
+					</p>
+				</TokenCreatorModal>
 
 				<NavigationMenu className="lg:flex hidden">
 					<NavigationMenuList className="gap-2">
